@@ -385,11 +385,6 @@ public class ClientConnectionManager
 					Command.addFieldValue(command, "user-jid", userJid);
 				}
 
-				String userJid = serv.getUserJid();
-				if (userJid != null) {
-					Command.addFieldValue(command, "user-jid", userJid);
-				}
-				
 				// In case of mass-disconnects, adjust the timeout properly
 				addOutPacketWithTimeout(command, stoppedHandler, 120l, TimeUnit.SECONDS);
 				log.log(Level.FINE, "Service stopped, sending packet: {0}", command);

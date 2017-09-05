@@ -30,6 +30,7 @@ import tigase.db.*;
 import tigase.xmpp.BareJID;
 import tigase.util.SimpleCache;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
