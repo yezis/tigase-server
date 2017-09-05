@@ -237,7 +237,7 @@ public class Presence
 		JID[] buddies = roster_util.getBuddies(session, SUB_BOTH);
 
 		try {
-			buddies = DynamicRoster.addBuddies(session, settings, buddies);
+			buddies = DynamicRoster.addBuddies(session, settings, buddies, TO_SUBSCRIBED);
 		} catch (RosterRetrievingException | RepositoryAccessException ex) {
 
 			// Ignore, handled in the JabberIqRoster code
@@ -773,7 +773,7 @@ public class Presence
 		JID[] buddies = roster.getBuddies(session, subscrs);
 
 		try {
-			buddies = DynamicRoster.addBuddies(session, settings, buddies);
+			buddies = DynamicRoster.addBuddies(session, settings, buddies, subscrs);
 		} catch (RosterRetrievingException | RepositoryAccessException ex) {
 
 			// Ignore, handled in the JabberIqRoster code
@@ -1659,12 +1659,10 @@ public class Presence
 
 						// Resend pending in subscription requests
 						resendPendingInRequests(session, results);
-					} else {
-
-						// Broadcast initial presence to 'from' or 'both' contacts
-						sendPresenceBroadcast(StanzaType.available, session, FROM_SUBSCRIBED,
-															 results, presenceEl, settings, roster_util);
 					}
+					// Broadcast initial presence to 'from' or 'both' contacts
+					sendPresenceBroadcast(StanzaType.available, session, FROM_SUBSCRIBED,
+														 results, presenceEl, settings, roster_util);
 
 					// Broadcast initial presence to other available user resources
 					updateUserResources(presenceEl, session, results, first);
